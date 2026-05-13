@@ -11,7 +11,7 @@ Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [P
 
 ## Overview
 
-This repository implements the **OnSSET–PyPSA-Earth Integrated Energy Planning (IEP)** procedure developed in the PhD thesis *System Optimization Planning* (Politecnico di Milano, 2026). The two models exchange information iteratively:
+This repository implements the **OnSSET–PyPSA-Earth Integrated Energy Planning (IEP)** procedure. The two models exchange information iteratively:
 
 ```
 Initialise COE⁽⁰⁾
