@@ -1,7 +1,7 @@
 # onsset-pypsa-iep
 
 **Soft-linking framework for integrated energy and electrification planning.**  
-Couples [OnSSET](https://github.com/KTH-dESA/onsset) (geospatial electrification) with [PyPSA-Earth](https://github.com/pypsa-meets-earth/pypsa-earth) (power system optimisation) through an iterative cost-of-electricity feedback loop.
+Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [PyPSA-Earth](https://github.com/pypsa-meets-earth/pypsa-earth) (power system optimisation) through an iterative cost-of-electricity feedback loop.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
@@ -16,12 +16,11 @@ This repository implements the **OnSSET–PyPSA-Earth Integrated Energy Planning
 ```
 Initialise COE⁽⁰⁾
         │
-┌───────▼────────┐
-│    OnSSET      │  ← COE_r  (nodal cost of electricity)
-│  Electrifi-    │
-│  cation        │
-│  masterplan    │
-└───────┬────────┘
+┌───────▼──────────┐
+│    OnSSET        │              ← COE_r  (nodal cost of electricity)
+│ Electrification  │
+│   masterplan     │
+└───────┬──────────┘
         │  L_Y,r  (aggregated nodal peak demand)
 ┌───────▼────────┐
 │  PyPSA-Earth   │
