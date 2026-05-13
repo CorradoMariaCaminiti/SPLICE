@@ -177,7 +177,7 @@ Each iteration produces three files in `output/`:
 
 ## Input data
 
-Large geospatial and compressed files (`*.gz`, `*.gpkg`, `*.shp`, `*.csv` > 10 MB) are **not tracked by Git**. They are archived on Zenodo at [DOI: 10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX).
+Large geospatial and compressed files (`*.gz`, `*.gpkg`, `*.shp`, `*.csv` > 10 MB) are **not tracked by Git**. They are archived on Zenodo at (https://doi.org/10.5281/zenodo.XXXXXXX)](https://zenodo.org/records/20157076).
 
 Download and place them in `input/` before running the pipeline.
 
