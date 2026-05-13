@@ -247,4 +247,4 @@ OnSSET and PyPSA-Earth are independently licensed; consult their repositories be
 ## Acknowledgements
 
 Developed at the Department of Energy, Politecnico di Milano.  
-Supervisor: Prof. Marco Merlo · Tutor: Prof. Alberto Berizzi · Doctoral Program Chair: Prof. Marco Mussetta.
+
