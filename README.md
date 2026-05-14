@@ -64,16 +64,7 @@ onsset-pypsa-iep/
 │   └── __init__.py
 │
 ├── input/
-│   ├── OnSSET_InputFile_Calibrated.csv   # Calibrated OnSSET community-level inputs
-│   ├── UGA_specs.xlsx                    # Uganda PyPSA-Earth scenario specifications
-│   ├── UGA_gis_inputs_updated.gz         # GIS inputs for PyPSA-Earth network build
-│   ├── industrialDem.gpkg                # Industrial demand (geospatial)
-│   ├── regionsUpgraded_GADM.gpkg         # Administrative regions (GADM)
-│   ├── HGEF.csv                          # Hydropower generation and flow data
-│   ├── ug-2-pv.csv                       # Solar PV capacity factor time series
-│   ├── ug-2-wind.csv                     # Wind capacity factor time series
-│   ├── ug-1/final_clusters.*             # Pre-computed population clusters (shapefile)
-│   └── UGA/UGA/UGA_mv_lines.*            # Uganda MV network (shapefile)
+│
 │
 ├── output/                        # Generated at runtime — see Output format below
 │
