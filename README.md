@@ -98,22 +98,39 @@ Key validated outputs:
 
 ## Installation
 
-> **Prerequisites:** Python ≥ 3.10. PyPSA-Earth must be installed and configured separately — see its [repository](https://github.com/pypsa-meets-earth/pypsa-earth) and [documentation](https://pypsa-meets-earth.github.io/pypsa-earth/).
+### 1. Clone SPLICE
 
 ```bash
-# 1. Clone this repository
-git clone https://github.com/<your-org>/onsset-pypsa-iep.git
-cd onsset-pypsa-iep
+git clone https://github.com/CorradoMariaCaminiti/SPLICE.git
+cd SPLICE
+```
 
-# 2. Create and activate a virtual environment
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+### 2. Clone the Uganda branch of PyPSA-Earth
 
-# 3. Install dependencies
+```bash
+git clone --branch UG_branch_updated https://github.com/CorradoMariaCaminiti/pypsa-earth.git
+```
+
+> SPLICE and PyPSA-Earth should sit **side by side** in the same parent folder.  
+> Then set the path to your local PyPSA-Earth clone in `master_v2.py` line 13.
+
+### 3. Set up the conda environment
+
+```bash
+conda create -n splice python=3.10
+conda activate splice
 pip install -r requirements.txt
-
-# 4. Install the OnSSET package in editable mode
 pip install -e ./onsset
+```
+
+> PyPSA and linopy are installed as part of PyPSA-Earth — see its  
+> [installation guide](https://pypsa-meets-earth.github.io/pypsa-earth/) for solver setup.
+
+### 4. Download input data from Zenodo
+
+```bash
+# Download from https://zenodo.org/records/XXXXXXX
+# and place all files in input/
 ```
 
 ---
