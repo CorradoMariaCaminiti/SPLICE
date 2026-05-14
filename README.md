@@ -5,7 +5,7 @@ Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [P
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI][(https://doi.org/10.5281/zenodo.20157076)](https://doi.org/10.5281/zenodo.20157076)
 
 ---
 
@@ -129,7 +129,7 @@ pip install -e ./onsset
 ### 4. Download input data from Zenodo
 
 ```bash
-# Download from https://zenodo.org/records/XXXXXXX
+# Download from [https://zenodo.org/records/XXXXXXX](https://doi.org/10.5281/zenodo.20157076)
 # and place all files in input/
 ```
 
