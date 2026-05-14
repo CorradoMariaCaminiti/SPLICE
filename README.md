@@ -129,7 +129,8 @@ pip install -e ./onsset
 ### 4. Download input data from Zenodo
 
 ```bash
-# Download from [https://zenodo.org/records/XXXXXXX](https://doi.org/10.5281/zenodo.20157076)
+# Download from (https://zenodo.org/badge/DOI/10.5281/zenodo.20157076.svg)](https://doi.org/10.5281/zenodo.20157076)
+
 # and place all files in input/
 ```
 
