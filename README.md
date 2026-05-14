@@ -5,7 +5,7 @@ Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [P
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![DOI][(https://doi.org/10.5281/zenodo.20157076)](https://doi.org/10.5281/zenodo.20157076)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20157076.svg)](https://doi.org/10.5281/zenodo.20157076)
 
 ---
 
@@ -215,35 +215,7 @@ A LP/MILP solver compatible with PyPSA is required (e.g. [HiGHS](https://highs.d
 
 ---
 
-## Methodology reference
 
-Full methodological detail is in Chapters 5–6 of the thesis:
-
-- **Section 5.1.2** — soft-linking procedure and variable exchange (Table 5.2)
-- **Algorithm 1** — pseudocode of the iterative loop
-- **Section 5.2** — planned transmission corridor extension to PyPSA-Earth
-- **Chapter 6** — Uganda scenario results and validation
-
----
-
-## Citation
-
-If you use this framework, please cite:
-
-```bibtex
-@phdthesis{caminiti2026system,
-  author     = {Caminiti, Corrado Maria},
-  title      = {System Optimization Planning},
-  school     = {Politecnico di Milano},
-  year       = {2026},
-  department = {Department of Energy},
-  note       = {Supervisor: Prof. Marco Merlo},
-}
-```
-
-A machine-readable citation is in [`CITATION.cff`](CITATION.cff).
-
----
 
 ## License
 
