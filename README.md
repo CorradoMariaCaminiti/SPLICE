@@ -101,20 +101,16 @@ Key validated outputs:
 ### 1. Clone SPLICE
 
 ```bash
-git clone https://github.com/CorradoMariaCaminiti/SPLICE.git
+git clone https://github.com/CorradoMariaCaminiti/SPLICE.git --recurse-submodules
 cd SPLICE
 ```
 
-### 2. Clone the Uganda branch of PyPSA-Earth
-
-```bash
-git clone --branch UG_branch_updated https://github.com/CorradoMariaCaminiti/pypsa-earth.git
-```
+The cloning also install the suitable PyPSA-Earth branch as a git submodule, so you don't need to clone it separately.
 
 > SPLICE and PyPSA-Earth should sit **side by side** in the same parent folder.  
 > Then set the path to your local PyPSA-Earth clone in `master_v2.py` line 13.
 
-### 3. Set up the conda environment
+### 2. Set up the conda environment
 
 ```bash
 conda create -n splice python=3.10
@@ -126,7 +122,7 @@ pip install -e ./onsset
 > PyPSA and linopy are installed as part of PyPSA-Earth — see its  
 > [installation guide](https://pypsa-meets-earth.github.io/pypsa-earth/) for solver setup.
 
-### 4. Download input data from Zenodo
+### 3. Download input data from Zenodo
 
 ```bash
 # Download from (https://zenodo.org/badge/DOI/10.5281/zenodo.20157076.svg)](https://doi.org/10.5281/zenodo.20157076)
@@ -227,5 +223,5 @@ OnSSET and PyPSA-Earth are independently licensed; consult their repositories be
 
 ## Acknowledgements
 
-Developed at the Department of Energy, Politecnico di Milano.  
+Developed at the Department of Energy, Politecnico di Milano, and DESTEC, University of Pisa.
 

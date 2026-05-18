@@ -1,0 +1,4 @@
+[submodule "pypsa-earth-splice"]
+	path = pypsa-earth-splice
+	url = https://github.com/CorradoMariaCaminiti/pypsa-earth-splice
+	branch = pypsa-earth-splice-UG
