@@ -1,4 +1,4 @@
-# onsset-pypsa-iep
+# SPLICE
 
 **Soft-linking framework for integrated energy and electrification planning.**  
 Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [PyPSA-Earth](https://github.com/pypsa-meets-earth/pypsa-earth) (power system optimisation) through an iterative cost-of-electricity feedback loop.
@@ -11,7 +11,12 @@ Couples [OnSSET](https://github.com/OnSSET) (geospatial electrification) with [P
 
 ## Overview
 
-This repository implements the **OnSSET–PyPSA-Earth Integrated Energy Planning (IEP)** procedure. The two models exchange information iteratively:
+SPLICE (Soft-linking Pipeline for Integrated Energy and Electrification) iteratively couples two established open-source models:
+
+- **OnSSET** — a geospatial electrification planning tool that allocates least-cost technologies (grid extension, mini-grids, stand-alone systems) to unelectrified settlements.
+- **PyPSA-Earth** — a power system optimisation model that determines the generation portfolio, storage, and transmission expansion needed to meet national electricity demand at least cost.
+
+Neither model alone accounts for the feedback between electrification choices and power-system costs. SPLICE closes this gap through an iterative exchange: OnSSET produces spatially explicit demand estimates that inform a PyPSA-Earth optimisation, which in turn yields updated nodal costs of electricity (COE) that reshape the electrification masterplan in the next OnSSET run.
 
 ```
 Initialise COE⁽⁰⁾
@@ -36,14 +41,14 @@ Initialise COE⁽⁰⁾
   (next iteration)
 ```
 
-The loop terminates when the absolute change in nodal COE between consecutive iterations falls below ε (Eq. 5.1 of the thesis). In the Uganda case study, convergence is typically reached in **3–5 iterations**.
+The loop terminates when the absolute change in nodal COE between consecutive iterations falls below the convergence threshold ε. In practice, convergence is reached within a small number of iterations.
 
 ---
 
 ## Repository structure
 
 ```
-onsset-pypsa-iep/
+SPLICE/
 │
 ├── master_v2.py                  # Main pipeline: soft-linking loop orchestrator
 ├── calculateCOE.py               # Extracts nodal COE from PyPSA-Earth results
@@ -63,10 +68,9 @@ onsset-pypsa-iep/
 │   ├── funcs.py                  # Shared utility functions
 │   └── __init__.py
 │
-├── input/
+├── input/                        # Input data — see Input data section below
 │
-│
-├── output/                        # Generated at runtime — see Output format below
+├── output/                       # Generated at runtime — see Output format below
 │
 ├── detailed_tech_parameters.ipynb # Technology parameter exploration notebook
 ├── funcs.ipynb                    # Utility function development notebook
@@ -75,24 +79,6 @@ onsset-pypsa-iep/
 ├── LICENSE
 └── README.md
 ```
-
----
-
-## Case study: Uganda (2050)
-
-Three scenarios are implemented, spanning alternative electrification targets and industrial demand trajectories.
-
-| Scenario | Description | Total demand | COE | Grid connected |
-|---|---|---|---|---|
-| 1 — Policy-Aligned | 100% electrification, Tier 5/3, CO₂ constraint | 94.6 TWh/y | 0.228 €/kWh | 94.8% |
-| 2 — Trend Continuation | 75% electrification, Tier 3/3, no CO₂ constraint | 57.1 TWh/y | 0.196 €/kWh | 72.9% |
-| 3 — High Industrial | 100% electrification, Tier 5/5, CO₂ constraint, 150% industrial demand | 328.7 TWh/y | 0.251 €/kWh | 99.7% |
-
-Key validated outputs:
-- Mutually consistent generation portfolio and electrification masterplan per scenario
-- Transmission expansion aligned with Uganda's planned UETCL corridors
-- COE range: **0.196–0.251 €/kWh** across scenarios
-- Renewable/conventional capacity ratio: **3.3 to 67.7** depending on CO₂ constraint
 
 ---
 
@@ -105,10 +91,10 @@ git clone https://github.com/CorradoMariaCaminiti/SPLICE.git --recurse-submodule
 cd SPLICE
 ```
 
-The cloning also install the suitable PyPSA-Earth branch as a git submodule, so you don't need to clone it separately.
+The `--recurse-submodules` flag also clones the compatible PyPSA-Earth branch, so no separate cloning is needed.
 
 > SPLICE and PyPSA-Earth should sit **side by side** in the same parent folder.  
-> Then set the path to your local PyPSA-Earth clone in `master_v2.py` line 13.
+> Set the path to your local PyPSA-Earth clone in `master_v2.py` line 13.
 
 ### 2. Set up the conda environment
 
@@ -125,8 +111,7 @@ pip install -e ./onsset
 ### 3. Download input data from Zenodo
 
 ```bash
-# Download from (https://zenodo.org/badge/DOI/10.5281/zenodo.20157076.svg)](https://doi.org/10.5281/zenodo.20157076)
-
+# Download from https://doi.org/10.5281/zenodo.20157076
 # and place all files in input/
 ```
 
@@ -140,7 +125,7 @@ pip install -e ./onsset
 python master_v2.py
 ```
 
-Scenario parameters (electrification tier, demand assumptions, CO₂ constraints) are configured in `onsset/configModifier.py` and `input/UGA_specs.xlsx`.
+Scenario parameters (electrification tier, demand assumptions, CO₂ constraints) are configured in `onsset/configModifier.py` and the country specs file in `input/`.
 
 ### Run OnSSET standalone
 
@@ -166,11 +151,11 @@ Each iteration produces three files in `output/`:
 
 ---
 
-## Key modules explained
+## Key modules
 
-**`master_v2.py`** — implements Algorithm 1 of the thesis: initialises COE, calls OnSSET, aggregates demand, calls PyPSA-Earth, extracts updated COE, and checks the convergence criterion `|COE^(it) − COE^(it−1)| < ε`.
+**`master_v2.py`** — orchestrates the soft-linking loop: initialises COE, calls OnSSET, aggregates demand, calls PyPSA-Earth, extracts updated COE, and checks the convergence criterion `|COE^(it) − COE^(it−1)| < ε`.
 
-**`calculateCOE.py`** — reads the PyPSA-Earth optimised network and computes the nodal marginal cost of electricity (shadow price of the nodal energy balance constraint) that is fed back into OnSSET.
+**`calculateCOE.py`** — reads the PyPSA-Earth optimised network and computes the nodal marginal cost of electricity (shadow price of the nodal energy balance constraint) fed back into OnSSET.
 
 **`onsset/footbridge.py`** — the coupling layer. Handles (i) geospatial aggregation of grid-connected residential demand from OnSSET clusters to PyPSA-Earth nodes, and (ii) injection of the updated COE into OnSSET's LCOE comparisons.
 
@@ -182,18 +167,18 @@ Each iteration produces three files in `output/`:
 
 ## Input data
 
-Large geospatial and compressed files (`*.gz`, `*.gpkg`, `*.shp`, `*.csv` > 10 MB) are **not tracked by Git**. They are archived on Zenodo at (https://doi.org/10.5281/zenodo.XXXXXXX)](https://zenodo.org/records/20157076).
+Large geospatial and compressed files (`*.gz`, `*.gpkg`, `*.shp`, `*.csv` > 10 MB) are **not tracked by Git**. They are archived on Zenodo at [https://doi.org/10.5281/zenodo.20157076](https://zenodo.org/records/20157076).
 
 Download and place them in `input/` before running the pipeline.
 
-| File | Source | Notes |
+| File type | Description | Typical source |
 |---|---|---|
-| `OnSSET_InputFile_Calibrated.csv` | Derived from [WorldPop](https://www.worldpop.org/) + [GADM](https://gadm.org/) | Calibrated to Uganda 2022 electrification rate |
-| `UGA_gis_inputs_updated.gz` | PyPSA-Earth automated download | Uganda network and resource data |
-| `UGA_specs.xlsx` | This work | Scenario-specific PyPSA-Earth configuration |
-| `industrialDem.gpkg` | [IEA Uganda Energy Transition Plan](https://www.iea.org/reports/uganda-energy-transition-plan) | Geospatially distributed industrial demand |
-| `ug-2-pv.csv`, `ug-2-wind.csv` | [renewables.ninja](https://www.renewables.ninja/) via PyPSA-Earth | Capacity factor time series |
-| `HGEF.csv` | Uganda ERA / UETCL | Hydropower generation and flow data |
+| OnSSET calibrated input (`.csv`) | Geospatial settlement data with calibrated electrification attributes | [WorldPop](https://www.worldpop.org/), [GADM](https://gadm.org/), national surveys |
+| Network and resource data (`.gz`) | Country-level grid topology, renewable resource maps | PyPSA-Earth automated download |
+| Country specs (`.xlsx`) | PyPSA-Earth configuration and scenario parameters | This work |
+| Industrial demand (`.gpkg`) | Geospatially distributed industrial load | National energy plans, [IEA country reports](https://www.iea.org/) |
+| Capacity factor time series (`.csv`) | Solar and wind hourly capacity factors | [renewables.ninja](https://www.renewables.ninja/) via PyPSA-Earth |
+| Hydropower data (`.csv`) | Hydropower generation potential and flow data | National grid operator / energy regulator |
 
 ---
 
@@ -206,13 +191,11 @@ Download and place them in `input/` before running the pipeline.
 | [pandas](https://pandas.pydata.org/) | Tabular data handling |
 | [geopandas](https://geopandas.org/) | Spatial joins and GIS operations |
 | [numpy](https://numpy.org/) | Numerical operations |
-| [openpyxl](https://openpyxl.readthedocs.io/) | Reading `UGA_specs.xlsx` |
+| [openpyxl](https://openpyxl.readthedocs.io/) | Reading Excel specs files |
 
-A LP/MILP solver compatible with PyPSA is required (e.g. [HiGHS](https://highs.dev/) — free, or [Gurobi](https://www.gurobi.com/) — commercial). Results in this repository were produced with Gurobi on a 12th-Gen Intel Core i7-1260P (16 cores, 32 GB RAM).
+A LP/MILP solver compatible with PyPSA is required (e.g. [HiGHS](https://highs.dev/) — free, or [Gurobi](https://www.gurobi.com/) — commercial).
 
 ---
-
-
 
 ## License
 
@@ -224,4 +207,3 @@ OnSSET and PyPSA-Earth are independently licensed; consult their repositories be
 ## Acknowledgements
 
 Developed at the Department of Energy, Politecnico di Milano, and DESTEC, University of Pisa.
-
