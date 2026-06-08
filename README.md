@@ -20,8 +20,8 @@ Neither model alone accounts for the feedback between electrification choices an
 
 <p align="center">
   <img src="images/image1.png" height="400">
-  <img src="images/image2.png" height="400">
-  <img src="images/image3.png" height="400">
+  <img src="images/image2.png" height="200">
+  <img src="images/image3.png" height="200">
 </p>
 
 
