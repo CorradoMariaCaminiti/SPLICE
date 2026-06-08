@@ -19,7 +19,7 @@ SPLICE (Soft-linking Pipeline for Integrated Energy and Electrification) iterati
 Neither model alone accounts for the feedback between electrification choices and power-system costs. SPLICE closes this gap through an iterative exchange: OnSSET produces spatially explicit demand estimates that inform a PyPSA-Earth optimisation, which in turn yields updated nodal costs of electricity (COE) that reshape the electrification masterplan in the next OnSSET run.
 
 <p align="center">
-  <img src="images/image1.png" height="400">
+  <img src="images/image1.png" height="200">
   <img src="images/image2.png" height="200">
   <img src="images/image3.png" height="200">
 </p>
