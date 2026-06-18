@@ -1,0 +1,76 @@
+run:
+  name: UGBase260320_2
+  sector_name: ''
+  shared_cutouts: true
+  allow_scenario_failure: false
+countries:
+- UG
+scenario:
+  simpl:
+  - ''
+  ll:
+  - copt
+  clusters:
+  - 5
+  opts:
+  - Co2L-4h
+  planning_horizons:
+  - 2050
+  sopts:
+  - 144h
+  demand:
+  - AB
+enable:
+  retrieve_databundle: false
+  retrieve_databundle_sector: true
+  retrieve_cost_data: true
+  download_osm_data: true
+  build_natura_raster: false
+  build_cutout: false
+  progress_bar: true
+cluster_options:
+  alternative_clustering: true
+  simplify_network:
+    p_threshold_drop_isolated: 1
+    p_threshold_merge_isolated: false
+    s_threshold_fetch_isolated: 0.05
+    remove_stubs: false
+electricity:
+  co2limit: 3e+5
+  renewable_carriers:
+  - solar
+  - onwind
+  - hydro
+  extendable_carriers:
+    Generator:
+    - solar
+    - onwind
+    - hydro
+    - CCGT
+    - OCGT
+    StorageUnit: []
+    Store:
+    - battery
+    Link: []
+load_options:
+  scale: 1
+  disaggregation:
+    method: geospatial
+    geospatial:
+      source: C:\Users\corra\pypsa-earth\data/demand_2.geojson
+      scaling: absolute
+clean_osm_data_options:
+  names_by_shapes: true
+  threshold_voltage: 30000
+  tag_substation: transmission
+  add_line_endings: true
+  generator_name_method: OSM
+  use_custom_lines: add_custom
+  path_custom_lines: data/custom/osm_custom_lines_missing.geojson
+  use_custom_substations: custom_only
+  path_custom_substations: data/custom/osm_custom_buses_missing.geojson
+build_osm_network:
+  group_close_buses: true
+  group_tolerance_buses: 2000
+  split_overpassing_lines: true
+  overpassing_lines_tolerance: 1
