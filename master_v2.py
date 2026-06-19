@@ -10,7 +10,7 @@ input("Press ENTER to continue...")
 countryy = "Uganda" 
 
 #Insert here your address of the folder
-pypsaPath = r"D:\iep_pypsa-earth" #Substitute here the pypsa position in your machine
+pypsaPath = r"C:\Users\corra\SPLICE\pypsa-earth-splice" #Substitute here the pypsa position in your machine
 conda_exe = os.path.join(r"C:\Users","corra","anaconda3", "Scripts", "conda.exe") #Substitute here the conda.exe
 coe = 0.1                # initial guess
 prev_coe = float("inf")  # ensures first iteration runs
@@ -20,7 +20,7 @@ max_it = 20              # safety stop
 while abs(coe - prev_coe) > eps and it < max_it: 
     prev_coe = coe
     run_onsset_scenario(countryy, coe, it, pypsaPath) 
-    demandLocation = footbridge(it, pypsaPath)
+    demandLocation, areas = footbridge(it, pypsaPath)
     configModifier(it, pypsaPath, demandLocation)
     conda_env_name = "pypsa-earth"
     

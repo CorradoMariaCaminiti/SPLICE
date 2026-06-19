@@ -103,8 +103,9 @@ def footbridge(it, pypsapath):
     industrial["IndustrialDemand"] = industrial["IndustrialDemand"].fillna(0)
     
     areas = areas.merge(industrial[['GID_1', 'IndustrialDemand']], left_on='GID_1', right_on='GID_1', how='left') 
-    areas['country'] = 'UG' 
+    areas['country'] = 'UG'  
     areas.drop(columns=["COUNTRY"], inplace = True) 
     path = os.path.join(pypsapath, f"data/demand_{it}.geojson")
+    
     areas.to_file(path, driver="GeoJSON") 
-    return path
+    return path, areas

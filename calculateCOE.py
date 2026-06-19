@@ -10,8 +10,8 @@ import pypsa
 import csv
 import re 
 import yaml
-pypsa_path_original = r"C:\Users\corra\pypsa-earth"
-results_folder = r"C:\Users\corra\pypsa-earth\results"
+pypsa_path_original = r"C:\Users\corra\SPLICE\pypsa-earth-splice"
+results_folder = os.path.join(pypsa_path_original, "results")
 config_path = os.path.join(pypsa_path_original, "config.yaml")
 
 with open(config_path, "r") as f:
@@ -62,7 +62,7 @@ COE = total_cost / (total_energy_mwh * 1000)  # convert MWh -> kWh
 print(f"{COE:.6f}") 
 csv_filename="coe_results.csv"
 initial_folder = os.path.join(
-    r"C:\Users\corra\pypsa-earth\results",
+    results_folder,
     f"{country_prefix}_0"  # combine prefix + iteration here
 )
 csv_path = os.path.join(initial_folder, csv_filename)
