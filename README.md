@@ -108,12 +108,12 @@ The `--recurse-submodules` flag **also clones the compatible PyPSA-Earth branch*
 
 ```bash
 conda env create -f environment.yml
-conda env create -f pypsa-earth-splice/envs/win-64.lock.yaml
+conda env create -f pypsa-earth-splice/envs/windows-pinned.yaml
 ```
 The second command installs pypsa-earth specific to Windows. For Linux and macOS are:
 ```bash
-conda env create -f pypsa-earth-splice/envs/linux-64.lock.yaml
-conda env create -f pypsa-earth-splice/envs/osx-64.lock.yaml
+conda env create -f pypsa-earth-splice/envs/linux-pinned.yaml
+conda env create -f pypsa-earth-splice/envs/macos-pinned.yaml
 ```
 > PyPSA and linopy are installed as part of PyPSA-Earth — see its  
 > [installation guide](https://pypsa-meets-earth.github.io/pypsa-earth/) for solver setup and any other inquiry.
