@@ -93,12 +93,13 @@ SPLICE/
 
 ### 1. Clone SPLICE
 
+The following instructions are meant for Git Bash. Other cloning methods might fail.
 ```bash
-git clone https://github.com/CorradoMariaCaminiti/SPLICE.git --recurse-submodules
+git clone --recurse-submodules https://github.com/CorradoMariaCaminiti/SPLICE.git SPLICE
 cd SPLICE
 ```
 
-The `--recurse-submodules` flag also clones the compatible PyPSA-Earth branch, so no separate cloning is needed.
+The `--recurse-submodules` flag **also clones the compatible PyPSA-Earth branch**, so no separate cloning is needed.
 
 > SPLICE and PyPSA-Earth should sit **side by side** in the same parent folder.  
 > Set the path to your local PyPSA-Earth clone in `master_v2.py` line 13.
@@ -106,14 +107,16 @@ The `--recurse-submodules` flag also clones the compatible PyPSA-Earth branch, s
 ### 2. Set up the conda environment
 
 ```bash
-conda create -n splice python=3.10
-conda activate splice
-pip install -r requirements.txt
-pip install -e ./onsset
+conda env create -f environment.yml
+conda env create -f pypsa-earth-splice/envs/win-64.lock.yaml
 ```
-
+The second command installs pypsa-earth specific to Windows. For Linux and macOS are:
+```bash
+conda env create -f pypsa-earth-splice/envs/linux-64.lock.yaml
+conda env create -f pypsa-earth-splice/envs/osx-64.lock.yaml
+```
 > PyPSA and linopy are installed as part of PyPSA-Earth — see its  
-> [installation guide](https://pypsa-meets-earth.github.io/pypsa-earth/) for solver setup.
+> [installation guide](https://pypsa-meets-earth.github.io/pypsa-earth/) for solver setup and any other inquiry.
 
 ### 3. Download input data from Zenodo
 
